@@ -1,9 +1,8 @@
-```markdown
-# FastAPI Application
+# FastAPI Application.
 
 This module contains the main settings and routes for the FastAPI application.
 
-## Imports
+## Imports:
 
 - **FastAPI**: Main framework for creating web applications.
 - **Path, Query**: Used for validations of route and query parameters.
@@ -13,13 +12,13 @@ This module contains the main settings and routes for the FastAPI application.
 - **Optional, List**: Data types for type annotations.
 - **date and time**: Management of dates and times.
 
-## Classes
+## Classes:
 
 - **Movies**: Data model for movies.
 - **CreateMovie**: Model for creating new films with validations.
 - **UpdateMovie**: Model for updating movies.
 
-## Routes
+## Routes:
 
 - **GET /**: Home page.
 - **GET /movies**: Get all the movies.
@@ -30,9 +29,14 @@ This module contains the main settings and routes for the FastAPI application.
 - **DELETE /movies/{id}**: Delete a movie.
 - **GET /fastapi_MVC/PDF**: Get a PDF file.
 
-## To Run
-
-```bash
-uvicorn main:app --reload
+## Run the aplication.
+- Activate the virtual environment:
+``` bash
+            source venv/bin/activate
 ```
+
+
+- Run main  file: 
+```bash 
+            uvicorn main:app --reload 
 ```
