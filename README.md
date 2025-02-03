@@ -38,5 +38,5 @@ This module contains the main settings and routes for the FastAPI application.
 
 - Run main  file: 
 ```bash 
-            uvicorn main:app --reload 
+            uvicorn src.main:app --reload 
 ```
