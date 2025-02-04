@@ -34,7 +34,7 @@ def get_movies() -> List[Movies]:
     if movies:
         contenido = [movie.model_dump() for movie in movies]
         return JSONResponse(content=contenido)
-    return JSONResponse(content=[], status_code= 404)
+    return HTTPException(status_code= 500, detail='No hay movies registradas')
     
 
 # Buscar una movie por el id
@@ -45,22 +45,28 @@ def get_movie(id: int = Path(gt=0)) -> Movies:
             return JSONResponse(content= movie.model_dump(),)
     raise HTTPException(status_code=404, detail="Movie no encontrada")
 
+
 # Filtrar una movie por category y year 
 @movie_router.get('/movies/', tags=['Movies'])
 def filter_movie(
     category: str = Query(min_length= 3, max_length= 20), 
     year: int = Query(gt=1650, le= datetime.now().year)
-) -> Movies:
-    for movie in movies:
-        if (movie.category.lower() == category.lower()) and (movie.year == year):
-            return JSONResponse(content= movie.model_dump())
-    raise HTTPException(status_code=404, detail="Movie no encontrada")
+) -> List[Movies]:
+    if not movies:
+        return HTTPException(status_code=404, detail= 'La lista de movies esta vacia')
+    
+    list_movies: List[Movies] = [movie for movie in movies if (movie.category.lower() == category.lower()) and (movie.year == year)]
+
+    if not list_movies:
+        raise HTTPException(status_code=404, detail='Movie no encontrada')
+    
+    return list_movies
+
 
 # Agregar una nueva movie
 @movie_router.post('/movies', tags=['Movies'], status_code= 201)
 def post_movie(movie: CreateMovie) -> RedirectResponse:
-    new_movie = Movies(**movie.model_dump())  # Convertir CreateMovie a Movies
-    movies.movie_routerend(new_movie)
+    movies.append(movie)
     return RedirectResponse('/movies', status_code=303)
 
 # Actualizar una movie 

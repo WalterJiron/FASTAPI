@@ -33,11 +33,11 @@ This module contains the main settings and routes for the FastAPI application.
 
 - Activate the virtual environment:
     ```bash
-    source venv/bin/activate
+        source venv/bin/activate
     ```
 
 - Run main file:
     ```bash
-    uvicorn src.main:app --reload
+        uvicorn src.main:app --reload
     ```
 
