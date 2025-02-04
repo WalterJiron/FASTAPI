@@ -44,3 +44,7 @@ app.include_router(router= movie_router)
 @app.get('/fastapi_MVC/PDF', tags=['PDFS'])
 def get_pdf() -> FileResponse:
     return FileResponse('src/FASTAPI-MVC.pdf')
+
+@app.get('/fastapi_Jinja2', tags=['PDFS'])
+def pdf_jinja2() -> FileResponse:
+    return FileResponse('src/FASTAPI-MVC-JINJA.pdf')
